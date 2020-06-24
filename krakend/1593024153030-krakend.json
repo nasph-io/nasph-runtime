@@ -1,0 +1,47 @@
+{
+  "version": 2,
+  "extra_config": {},
+  "timeout": "3000ms",
+  "cache_ttl": "300s",
+  "output_encoding": "json",
+  "name": "NasphAPIGateway",
+  "endpoints": [
+    {
+      "endpoint": "/api/micronaut/{number}",
+      "extra_config": {},
+      "output_encoding": "no-op",
+      "concurrent_calls": 1,
+      "backend": [
+        {
+          "url_pattern": "/",
+          "encoding": "no-op",
+          "sd": "static",
+          "extra_config": {}
+        }
+      ]
+    },
+    {
+      "endpoint": "/api/springboot",
+      "method": "GET",
+      "extra_config": {},
+      "output_encoding": "no-op",
+      "concurrent_calls": 1,
+      "querystring_params": [
+        "name"
+      ],
+      "backend": [
+        {
+          "url_pattern": "/ping?name={name}",
+          "encoding": "no-op",
+          "sd": "static",
+          "extra_config": {},
+          "method": "GET",
+          "host": [
+            "http://172.20.0.2"
+          ],
+          "disable_host_sanitize": false
+        }
+      ]
+    }
+  ]
+}
